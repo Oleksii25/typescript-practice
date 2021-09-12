@@ -1,9 +1,20 @@
-import { useState } from "react";
 import { Menu } from "semantic-ui-react";
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from "react-router-dom";
+import { add, remove } from '../redux/actions/actions';
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 const Navigation = () => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  
+  const addHandler = (): void =>  {
+    dispatch(add(1))
+  };
+
+  const removeHandler = () => {
+    dispatch(remove(1));
+  };
 
   return (
     <Menu>
@@ -13,6 +24,7 @@ const Navigation = () => {
         name="home"
         as={Link}
         to="/"
+        onClick={addHandler}
       >
         Home
       </Menu.Item>
@@ -22,6 +34,7 @@ const Navigation = () => {
         name="about"
         as={Link}
         to="/about"
+        onClick={removeHandler}
       >
         About
       </Menu.Item>
