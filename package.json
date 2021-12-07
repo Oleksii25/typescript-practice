@@ -10,6 +10,7 @@
     "@types/node": "^12.20.24",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "@craco/craco": "^6.3.0",
     "@semantic-ui-react/craco-less": "^1.2.3",
+    "@types/lodash": "^4.14.177",
     "@types/react-router-dom": "^5.1.8",
     "semantic-ui-less": "^2.4.1"
   }
