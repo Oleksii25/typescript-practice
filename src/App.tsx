@@ -6,12 +6,10 @@ import { RootState } from "./redux/rootReducer";
 import "./App.css";
 
 function App() {
-  const comments = useSelector((state: RootState) => state);
-
   return (
     <div className="App">
       <Navigation />
-      <h1>{comments.comments.comments}</h1>
+      <h1>{}</h1>
       <Switch>
         <Route exact path="/">
           <HomePage />

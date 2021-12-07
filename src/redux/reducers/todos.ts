@@ -1,4 +1,4 @@
-import { TodoTypes, TodoState, TodoActions } from "../types/todo";
+import { TodoTypes, TodoState, TodoActionTypes } from "../types/todo";
 
 const initialState: TodoState = {
   todos: [],
@@ -6,10 +6,14 @@ const initialState: TodoState = {
 
 export const toDoReducer = (
   state = initialState,
-  action: TodoActions
+  action: TodoActionTypes
 ): TodoState => {
-  const { ADD_TODO, CHANGE_TODO, DELETE_TODO } = TodoTypes;
+  const { ADD_TODO, CHANGE_TODO, DELETE_TODO, LOAD_TODO } = TodoTypes;
   switch (action.type) {
+    case LOAD_TODO:
+      return {
+        todos: action.payload,
+      };
     case ADD_TODO:
       return {
         todos: [...state.todos, action.payload],

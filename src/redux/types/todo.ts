@@ -14,6 +14,7 @@ export enum TodoTypes {
 
 interface LoadTodosAction {
   type: TodoTypes.LOAD_TODO;
+  payload: Todo[];
 }
 
 interface AddTodosACtion {
@@ -35,7 +36,7 @@ export interface TodoState {
   todos: Todo[];
 }
 
-export type TodoActions =
+export type TodoActionTypes =
   | ChangeTodoAction
   | AddTodosACtion
   | DeleteTodoAction

@@ -1,20 +1,19 @@
 import { Menu } from "semantic-ui-react";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { add, remove } from '../redux/actions/actions';
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
-const Navigation = () => {
+import { useTypeSelector } from "../hooks/UseTypeSelector";
+import { useEffect } from "react";
+import { loadTodosAction } from "../redux/actions/todo";
+
+const Navigation: React.FC = () => {
   const { pathname } = useLocation();
+  const todos = useTypeSelector((state) => state.todos);
   const dispatch = useDispatch();
-  
-  const addHandler = (): void =>  {
-    dispatch(add(1))
-  };
 
-  const removeHandler = () => {
-    dispatch(remove(1));
-  };
+  useEffect(() => {
+    dispatch(loadTodosAction());
+  }, []);
 
   return (
     <Menu>
@@ -24,7 +23,7 @@ const Navigation = () => {
         name="home"
         as={Link}
         to="/"
-        onClick={addHandler}
+        onClick={() => {}}
       >
         Home
       </Menu.Item>
@@ -34,7 +33,7 @@ const Navigation = () => {
         name="about"
         as={Link}
         to="/about"
-        onClick={removeHandler}
+        onClick={() => {}}
       >
         About
       </Menu.Item>
