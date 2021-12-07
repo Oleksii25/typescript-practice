@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
-import {reducer as commentReducer} from './reducers/comments';
+import { combineReducers } from "redux";
+import { toDoReducer } from "./reducers/todos";
 
 const rootReducer = combineReducers({
-  comments: commentReducer,
-})
+  todos: toDoReducer,
+});
 
 export type RootState = ReturnType<typeof rootReducer>;
 
