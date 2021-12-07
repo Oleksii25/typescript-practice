@@ -9,7 +9,6 @@ function App() {
   return (
     <div className="App">
       <Navigation />
-      <h1>{}</h1>
       <Switch>
         <Route exact path="/">
           <HomePage />
