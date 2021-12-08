@@ -7,13 +7,13 @@ const Navigation: React.FC = () => {
   return (
     <Menu>
       <Menu.Item
-        active={pathname === "/"}
+        active={pathname.includes("todos")}
         color="orange"
         name="home"
         as={Link}
-        to="/"
+        to="/todos/:id"
       >
-        Home
+        Todos
       </Menu.Item>
       <Menu.Item
         active={pathname === "/about"}

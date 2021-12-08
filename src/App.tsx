@@ -1,8 +1,6 @@
 import { Navigation } from "./components";
-import { HomePage, BlogPage, AboutPage } from "./pages";
-import { Switch, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "./redux/rootReducer";
+import { TodosPage, BlogPage, AboutPage } from "./pages";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -10,8 +8,8 @@ function App() {
     <div className="App">
       <Navigation />
       <Switch>
-        <Route exact path="/">
-          <HomePage />
+        <Route exact path="/todos/:todoId?">
+          <TodosPage />
         </Route>
         <Route exact path="/about">
           <AboutPage />
@@ -19,6 +17,7 @@ function App() {
         <Route exact path="/blog">
           <BlogPage />
         </Route>
+        <Redirect to="/todos" />
       </Switch>
     </div>
   );

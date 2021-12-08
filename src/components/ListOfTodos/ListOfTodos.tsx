@@ -1,26 +1,43 @@
-import { memo, FC, useState, useCallback } from "react";
+import { memo, FC, useState, useCallback, useEffect } from "react";
 import { Segment, List, Button } from "semantic-ui-react";
-import { ListOfTodosProps } from "./types";
+import { ListOfTodosProps } from "../types";
+import CN from "classnames";
 import { useActions } from "hooks";
 import { Todo } from "redux/types/todo";
-import EditTodoModal from "./EditModal/EditTodoModal";
+import EditTodoModal from "../EditModal/EditTodoModal";
+import "./styles.less";
+import { useHistory, useParams } from "react-router";
+import { TodoParams } from "components/types/ListOfTodos";
 
 const ListOfTodos: FC<ListOfTodosProps> = ({ todos }) => {
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
   const { deleteTodo } = useActions();
-
-  console.log(todos);
+  const history = useHistory();
+  const { todoId } = useParams<TodoParams>();
 
   const handleDelete = useCallback((id: number): void => {
     deleteTodo(id);
   }, []);
 
+  const handleChangeActiveTodo = useCallback((id: number): void => {
+    const path = `/todos/${id}`;
+    history.push(path);
+  }, []);
+
   return (
     <Segment>
-      <List>
+      <List className="todo-list">
         {todos.map((todo) => (
-          <List.Item key={todo.id}>
-            <Segment>
+          <List.Item
+            key={todo.id}
+            className="todo-list__item"
+            onClick={() => handleChangeActiveTodo(todo.id)}
+          >
+            <Segment
+              className={CN("todo-list__segment", {
+                active: todo.id === Number(todoId),
+              })}
+            >
               <h2>{todo.title}</h2>
               <Button.Group>
                 <Button
