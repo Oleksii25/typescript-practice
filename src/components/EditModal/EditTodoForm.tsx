@@ -1,21 +1,37 @@
 import { EditTodoFormProps } from "components/types";
-import { FC, memo, useCallback } from "react";
+import { FC, memo, useCallback, useEffect, useState } from "react";
 import { Form } from "semantic-ui-react";
+
 
 const EditTodoForm: FC<EditTodoFormProps> = ({
   editingTodo,
-  setEditingTodo,
+  setUpdatedTodo,
+  updatedTodo
 }) => {
+
   const handleUpdate = useCallback(
     (e, { name, value, checked }) => {
       if (editingTodo) {
         name === "title"
-          ? setEditingTodo({ ...editingTodo, [name]: value })
-          : setEditingTodo({ ...editingTodo, [name]: checked });
+          ? setUpdatedTodo({ ...updatedTodo, [name]: value })
+          : setUpdatedTodo({
+              ...updatedTodo,
+              [name]: checked,
+            });
       }
     },
-    [editingTodo]
+    [updatedTodo]
   );
+
+  useEffect(() => {
+    if(editingTodo) {
+      setUpdatedTodo({
+        title: editingTodo.title,
+        completed: editingTodo.completed,
+      });
+    }
+  }, [editingTodo]);
+  
 
   return (
     <Form>
@@ -23,7 +39,7 @@ const EditTodoForm: FC<EditTodoFormProps> = ({
         <Form.Field width={10}>
           <Form.Input
             label="Title"
-            value={editingTodo!.title}
+            value={updatedTodo?.title || ""}
             name="title"
             onChange={handleUpdate}
           />
@@ -33,7 +49,7 @@ const EditTodoForm: FC<EditTodoFormProps> = ({
           <Form.Checkbox
             toggle
             name="completed"
-            checked={editingTodo!.completed}
+            checked={updatedTodo?.completed || false}
             onChange={handleUpdate}
           />
         </Form.Field>
