@@ -36,6 +36,7 @@ const ListOfTodos: FC<ListOfTodosProps> = ({ todos }) => {
             <Segment
               className={CN("todo-list__segment", {
                 active: todo.id === Number(todoId),
+                completed: todo.completed
               })}
             >
               <h2>{todo.title}</h2>

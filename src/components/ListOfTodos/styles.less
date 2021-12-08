@@ -1,5 +1,13 @@
 .todo-list {
-  &__segment.active {
-    background-color: grey !important;
+  &__segment {
+    background-color: orange !important;
+
+    &.active {
+      border: 3px solid red;
+    }
+
+    &.completed {
+      background-color: green !important;
+    }
   }
 }

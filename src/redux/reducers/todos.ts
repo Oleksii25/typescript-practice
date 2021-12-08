@@ -19,11 +19,14 @@ export const toDoReducer = (
         todos: [...state.todos, action.payload],
       };
     case CHANGE_TODO:
+      const currentIndex = state.todos.findIndex(
+        (todo) => todo.id === action.payload.id
+      );
+      const copyTodos = state.todos;
+      copyTodos.splice(currentIndex, 1, action.payload);
+
       return {
-        todos: [
-          ...state.todos.filter((todo) => todo.id !== action.payload.id),
-          action.payload,
-        ],
+        todos: copyTodos,
       };
     case DELETE_TODO:
       return {
