@@ -1,10 +1,17 @@
-import { LoadTodos } from "../../api/todoUrl";
+import { fetchAllTodos, fetchTodosByUser } from "../../api/todoUrl";
 import { TodoTypes, TodoActionTypes, Todo } from "../types/todo";
 import { Dispatch } from "redux";
 
 export const loadTodosAction = () => {
   return async (dispatch: Dispatch<TodoActionTypes>) => {
-    const todos = await LoadTodos();
+    const todos = await fetchAllTodos();
+    dispatch({ type: TodoTypes.LOAD_TODO, payload: todos });
+  };
+};
+
+export const loadFilteredTodos = (id: number) => {
+  return async (dispatch: Dispatch<TodoActionTypes>) => {
+    const todos = await fetchTodosByUser(id);
     dispatch({ type: TodoTypes.LOAD_TODO, payload: todos });
   };
 };

@@ -2,8 +2,6 @@ import ListOfTodos from "components/ListOfTodos/ListOfTodos";
 
 import { FC, memo, useEffect } from "react";
 import { useTypeSelector, useActions } from "../hooks";
-import { useParams, useHistory } from "react-router";
-import { TodoParams } from "components/types";
 import useTodoUpdateUrl from "hooks/useTodoUpdateUrl";
 
 const TodosPage: FC = () => {
