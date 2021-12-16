@@ -1,19 +1,17 @@
-import { memo, FC, useState, useCallback, useEffect } from "react";
+import { memo, FC, useState, useCallback } from "react";
 import { Segment, List, Button } from "semantic-ui-react";
 import { ListOfTodosProps } from "../types";
 import CN from "classnames";
-import { useActions, UseTodoUpdateUrl } from "hooks";
+import { useActions } from "hooks";
 import { Todo } from "redux/types/todo";
 import EditTodoModal from "../EditModal/EditTodoModal";
 import "./styles.less";
-import { useHistory, useParams } from "react-router";
-import { TodoParams } from "components/types/ListOfTodos";
 import useTodoUpdateUrl from "hooks/useTodoUpdateUrl";
 
 const ListOfTodos: FC<ListOfTodosProps> = ({ todos }) => {
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
   const { deleteTodo } = useActions();
-  const [{todoId}, changeId] = useTodoUpdateUrl();
+  const [{ todoId }, changeId] = useTodoUpdateUrl();
 
   const handleDelete = useCallback((id: number): void => {
     deleteTodo(id);
@@ -24,7 +22,7 @@ const ListOfTodos: FC<ListOfTodosProps> = ({ todos }) => {
   }, []);
 
   return (
-    <Segment>
+    <Segment data-testid="test">
       <List className="todo-list">
         {todos.map((todo) => (
           <List.Item
